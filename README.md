@@ -1,51 +1,64 @@
-📡 Monitoramento Inteligente com IoT (ESP32 + MQTT + Node-RED)
-👥Integrantes
-João Victor Caetano, RM: 562074
-João Victor Bueno, RM: 564115
-Andrei de paiva, RM: 563061
+# 📡 Monitoramento Inteligente com IoT
+> **ESP32 + MQTT + Node-RED + MySQL**[cite: 1]
 
-Descrição do Projeto
+Este projeto desenvolve uma solução completa de monitoramento em tempo real para reservatórios, integrando hardware, protocolos de comunicação de baixa latência e persistência de dados para análise técnica.[cite: 1]
 
-Este projeto tem como objetivo desenvolver uma solução de monitoramento em tempo real utilizando conceitos de Internet das Coisas (IoT).
+---
 
-A aplicação simula o monitoramento de um reservatório, coletando dados de sensores e integrando-os com serviços externos para visualização e análise.
+## 👥 Integrantes
+| Nome Completo | RM |
+| :--- | :--- |
+| **João Victor Caetano** | 562074 |[cite: 1]
+| **João Victor Bueno** | 564115 |[cite: 1]
+| **Andrei de Paiva** | 563061 |[cite: 1]
 
-🧠 Arquitetura da Solução
+---
 
-ESP32 → MQTT → Node-RED → MySQL → Dashboard
-🔹 Fluxo:
-ESP32 envia dados dos sensores via MQTT
-Node-RED recebe e processa
-Dados são armazenados no MySQL
-Dashboard exibe em tempo real
-API externa (OpenWeather) complementa os dados
+## 🧠 Arquitetura da Solução
+O fluxo de dados segue a estrutura lógica de ponta a ponta, garantindo que a informação saia da ponta (sensor) e chegue tratada ao usuário final:[cite: 1]
 
-Tecnologias Utilizadas
-ESP32 (Arduino)
-MQTT (HiveMQ)
-Node-RED
-MySQL
-OpenWeather API
-JavaScript (Function Nodes)
+**ESP32** ➔ **MQTT (HiveMQ)** ➔ **Node-RED** ➔ **MySQL** ➔ **Dashboard**[cite: 1]
 
-📊 Funcionalidades
-📈 Monitoramento de nível do reservatório
-🌡️ Monitoramento de temperatura
-📏 Medição de distância
-⚠️ Sistema de alertas
-🌦️ Integração com API de clima externo
-💾 Armazenamento em banco de dados
-📊 Dashboard em tempo real
-🗄️ Estrutura do Banco de Dados
+### 🔹 Componentes do Fluxo:
+*   **ESP32:** Responsável pela leitura dos sensores e publicação via MQTT.[cite: 1]
+*   **MQTT:** Protocolo leve de mensageria para baixa latência.[cite: 1]
+*   **Node-RED:** Motor de regras que processa dados e integra a API OpenWeather para enriquecimento de contexto.[cite: 1]
+*   **MySQL:** Banco de dados relacional para persistência histórica.[cite: 1]
+*   **Dashboard:** Interface intuitiva para exibição de métricas e alertas em tempo real.[cite: 1]
 
-Tabela: sensores
+---
+
+## 🛠️ Tecnologias Utilizadas
+*   **Hardware:** ESP32 (Arduino)[cite: 1]
+*   **Protocolo:** MQTT (Broker HiveMQ)[cite: 1]
+*   **Orquestração:** Node-RED[cite: 1]
+*   **Banco de Dados:** MySQL[cite: 1]
+*   **API Externa:** OpenWeather (Dados climáticos)[cite: 1]
+*   **Linguagens:** C++, SQL, JavaScript (Function Nodes)[cite: 1]
+
+---
+
+## 📊 Funcionalidades
+- [x] **Nível do Reservatório:** Monitoramento volumétrico.[cite: 1]
+- [x] **Climatização:** Temperatura e sensação térmica local.[cite: 1]
+- [x] **Telemetria:** Medição precisa de distância via sensores.[cite: 1]
+- [x] **Inteligência:** Sistema automático de alertas.[cite: 1]
+- [x] **Histórico:** Armazenamento robusto para auditoria de dados.[cite: 1]
+
+---
+
+## 🗄️ Estrutura do Banco de Dados
+
+```sql
+-- Registro de telemetria dos sensores
 CREATE TABLE sensores (
     id INT AUTO_INCREMENT PRIMARY KEY,
     valor FLOAT,
     tipo VARCHAR(50),
     data TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-Tabela: clima_externo
+
+-- Dados climáticos externos
 CREATE TABLE clima_externo (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cidade VARCHAR(100),
@@ -56,50 +69,45 @@ CREATE TABLE clima_externo (
     vento_ms FLOAT,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+```[cite: 1]
 
-⚙️ Como Executar o Projeto
+---
 
-🔹 1. Instalar dependências do Node-RED
+## ⚙️ Como Executar o Projeto
+
+### 1. Preparar o Ambiente Node-RED
+No terminal, instale o core e as bibliotecas necessárias:
+```bash
 npm install -g node-red
 cd ~/.node-red
-npm install node-red-dashboard
-npm install node-red-node-mysql
-npm install node-red-node-openweathermap
-🔹 2. Rodar Node-RED
-node-red
+npm install node-red-dashboard node-red-node-mysql node-red-node-openweathermap
+```[cite: 1]
 
-Acesse:
+### 2. Configuração do Banco de Dados
+1. Crie um banco de dados chamado `iot`.[cite: 1]
+2. Execute os scripts SQL fornecidos acima.[cite: 1]
+3. No Node-RED, configure o nó MySQL com suas credenciais locais (User: `root` | Porta: `3306`).[cite: 1]
 
-http://localhost:1880
+### 3. Comunicação MQTT
+O projeto utiliza o broker público da HiveMQ:
+*   **Broker:** `broker.hivemq.com`[cite: 1]
+*   **Porta:** `1883`[cite: 1]
 
-🔹 3. Configurar MySQL
+---
 
-Criar banco iot
-Executar scripts SQL fornecidos
-Configurar no Node-RED:
-host: localhost
-porta: 3306
-user: root
-senha: sua_senha
-database: iot
+## 📂 Estrutura de Pastas
+```text
+📦 projeto-iot
+ ┣ 📂 esp32        # Código-fonte (.ino)
+ ┣ 📂 node-red     # Fluxos exportados (JSON)
+ ┣ 📂 database     # Scripts de criação e queries
+ ┗ 📜 README.md    # Documentação
+```[cite: 1]
 
-🔹 4. Configurar MQTT
+---
 
-broker: broker.hivemq.com
-porta: 1883
-🔹 5. Dashboard
+## 🎬 Demonstração
+📺 [Clique aqui para assistir ao vídeo do projeto](adicione_o_link_aqui)[cite: 1]
 
-Acesse:
-
-http://localhost:1880/ui
-Demonstração
-
-Vídeo demonstrativo: (adicione o link aqui)
-
-Estrutura do Projeto
-📦 projeto
- ┣ 📂 esp32
- ┣ 📂 node-red
- ┣ 📂 database
- ┣ 📜 README.md
-📌 Considerações Finais
+---
+> **Status do Projeto:** 🚀 Finalizado / Acadêmico[cite: 1]
