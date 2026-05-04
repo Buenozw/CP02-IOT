@@ -107,7 +107,7 @@ O projeto utiliza o broker público da HiveMQ:
 ---
 
 ## 🎬 Demonstração
-📺 [Clique aqui para assistir ao vídeo do projeto](adicione_o_link_aqui)[cite: 1]
+📺 LinkVideo: https://youtu.be/aQ18KPH5jpw[cite: 1]
 
 ---
 > **Status do Projeto:** 🚀 Finalizado / Acadêmico[cite: 1]
